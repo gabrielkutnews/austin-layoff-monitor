@@ -1,0 +1,53 @@
+{
+  "counties": ["Travis", "Williamson", "Hays", "Bastrop", "Caldwell"],
+  "cities": ["Austin", "Round Rock", "Georgetown", "Pflugerville", "Cedar Park", "Leander", "Kyle", "Buda", "Bastrop", "San Marcos"],
+  "local_job_threshold": 50,
+  "priority_companywide_jobs": 500,
+  "priority_companywide_percent": 5,
+  "news_window_days": 2,
+  "news_guid_retention_days": 14,
+  "event_retention_days": 90,
+  "priority_employers": {
+    "Whole Foods": ["Whole Foods", "Whole Foods Market"],
+    "Amazon": ["Amazon", "Amazon.com"],
+    "Oracle": ["Oracle", "Oracle Corp", "Oracle Corporation"],
+    "Tesla": ["Tesla", "Giga Texas", "Gigafactory Texas"],
+    "Dell": ["Dell", "Dell Technologies"],
+    "Samsung": ["Samsung", "Samsung Austin Semiconductor"],
+    "Apple": ["Apple", "Apple Inc"],
+    "IBM": ["IBM", "International Business Machines"],
+    "Meta": ["Meta", "Facebook"],
+    "Google": ["Google", "Alphabet"],
+    "AMD": ["AMD", "Advanced Micro Devices"],
+    "NXP": ["NXP", "NXP Semiconductors"],
+    "Indeed": ["Indeed", "Indeed.com"],
+    "Emerson/NI": ["Emerson", "National Instruments", "NI Corp"],
+    "Charles Schwab": ["Charles Schwab", "Schwab"],
+    "UT Austin": ["UT Austin", "University of Texas at Austin", "University of Texas-Austin"]
+  },
+  "priority_batches": [
+    ["Whole Foods", "Amazon", "Oracle", "Tesla", "Dell"],
+    ["Samsung", "Apple", "IBM", "Meta", "Google"],
+    ["AMD", "NXP", "Indeed", "Emerson/NI", "Charles Schwab"]
+  ],
+  "layoff_terms": ["layoff", "layoffs", "laid off", "job cuts", "workforce reduction", "eliminate jobs", "cuts jobs", "plant closure", "facility closing", "restructuring"],
+  "publisher_domains": [
+    "statesman.com", "bizjournals.com", "kut.org", "kxan.com", "kvue.com",
+    "fox7austin.com", "cbsaustin.com", "austinchronicle.com", "culturemap.com",
+    "spectrumlocalnews.com", "communityimpact.com", "austinmonitor.com", "texastribune.org",
+    "texasstandard.org", "tpr.org",
+    "chron.com", "reuters.com", "apnews.com", "bloomberg.com", "wsj.com",
+    "nytimes.com", "washingtonpost.com", "cnbc.com", "cnn.com", "bbc.com",
+    "techcrunch.com", "theverge.com", "wired.com", "arstechnica.com",
+    "businessinsider.com", "fortune.com", "forbes.com", "marketwatch.com",
+    "cbsnews.com", "nbcnews.com", "abcnews.go.com", "usatoday.com",
+    "dallasnews.com", "expressnews.com", "kera.org", "keranews.org"
+  ],
+  "public_employer_patterns": [
+    "city of austin", "travis county government", "williamson county government",
+    "hays county government", "bastrop county government", "caldwell county government",
+    " independent school district", " isd",
+    "school district", "state of texas", "texas department", "federal government",
+    "community college", "public library", "transit authority"
+  ]
+}

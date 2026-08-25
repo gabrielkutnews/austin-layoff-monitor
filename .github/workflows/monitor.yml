@@ -1,0 +1,29 @@
+name: Austin Layoff Monitor
+
+on:
+  schedule:
+    - cron: '0 * * * *' # hourly backstop; loop.sh polls every five minutes
+  workflow_dispatch: {}
+
+concurrency:
+  group: austin-layoff-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Poll every five minutes and chain the next run
+        env:
+          ALL_SECRETS: ${{ toJSON(secrets) }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash loop.sh

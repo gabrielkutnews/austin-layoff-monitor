@@ -1,1 +1,8 @@
-{}
+{
+  "news_clusters": {},
+  "news_initialized": true,
+  "news_seen": {},
+  "warn_events": {},
+  "warn_files": {},
+  "warn_initialized": true
+}

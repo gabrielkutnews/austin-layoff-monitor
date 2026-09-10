@@ -101,12 +101,9 @@ def load_config():
 
 
 def read_secrets():
-    secrets = {}
-    try:
-        secrets = json.loads(os.environ.get("ALL_SECRETS", "") or "{}")
-    except ValueError:
-        pass
-    token = (secrets.get("SLACK_BOT_TOKEN") or os.environ.get("SLACK_BOT_TOKEN") or "").strip()
+    # Secrets arrive as individual env vars, each mapped by name in monitor.yml;
+    # locally they are just ordinary env vars.
+    token = (os.environ.get("SLACK_BOT_TOKEN") or "").strip()
     if not token:
         try:
             p = subprocess.run(
@@ -116,7 +113,7 @@ def read_secrets():
                 token = p.stdout.strip()
         except (OSError, subprocess.SubprocessError):
             pass
-    raw_ids = secrets.get("SLACK_USER_IDS") or os.environ.get("SLACK_USER_IDS") or ""
+    raw_ids = os.environ.get("SLACK_USER_IDS") or ""
     user_ids = [x for x in re.split(r"[,\s]+", raw_ids.strip()) if x.startswith("U")]
     return token, user_ids
 

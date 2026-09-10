@@ -192,9 +192,12 @@ class WarnTests(ConfigMixin, unittest.TestCase):
 class StateTests(ConfigMixin, unittest.TestCase):
     def test_first_news_run_seeds_without_alerting(self):
         rss = (FIXTURES / "news.xml").read_bytes()
+        # Pin `now` to the fixture's era; otherwise the recency window drops
+        # every item as the wall clock moves past it and nothing gets seeded.
+        current = datetime(2026, 8, 24, 18, tzinfo=timezone.utc)
         with mock.patch.object(m, "request_bytes", return_value=(200, rss, {})):
             state = {}
-            alerts, changed = m.process_news(state, self.cfg)
+            alerts, changed = m.process_news(state, self.cfg, now=current)
         self.assertTrue(changed)
         self.assertEqual([], alerts)
         self.assertTrue(state["news_initialized"])

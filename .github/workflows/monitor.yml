@@ -24,6 +24,10 @@ jobs:
           python-version: '3.x'
       - name: Poll every five minutes and chain the next run
         env:
-          ALL_SECRETS: ${{ toJSON(secrets) }}
+          # Each secret mapped by name. Never toJSON(secrets): dumping the whole
+          # secret set into one env var is the standard exfiltration pattern and
+          # trips GitHub's malicious-workflow heuristic, which blocks the run.
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_USER_IDS: ${{ secrets.SLACK_USER_IDS }}
           GH_TOKEN: ${{ github.token }}
         run: bash loop.sh

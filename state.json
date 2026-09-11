@@ -1,7 +1,9 @@
 {
   "news_clusters": {},
   "news_initialized": true,
-  "news_seen": {},
+  "news_seen": {
+    "bb31b47e9400824e9ff0ba47": "2026-09-11T10:12:17Z"
+  },
   "warn_events": {},
   "warn_files": {},
   "warn_initialized": true

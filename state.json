@@ -1,8 +1,31 @@
 {
-  "news_clusters": {},
+  "news_clusters": {
+    "efaf7ed9f7afe9cbf48c7357": {
+      "closure": false,
+      "company": "Oracle",
+      "count": null,
+      "guid": "CBMiswFBVV95cUxQOEZ3c1N4VlJfc0RSY3E3SE5zWFl0WmgyamRYaGtvS0RKbWFTdUlCV2FqV1cxbTJYbWxmbXZ2SGJKNk05T2VWeUhMMEF0Z2RUWDdySHR2b0ZaTGZWaVB6SnExa3owWnlFYzI4N21McEp6S0dQUXdUaTZsRU1oMmhJOXR6bXBBaGd4Yk5tNkpWdXhGQXBRTkRQYjBZcElRM2o2aUFlYlMxLU1oUVdpaktZVGxnTQ",
+      "label": "\ud83d\udfe0 *REPORTED LOCAL LAYOFF*",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQOEZ3c1N4VlJfc0RSY3E3SE5zWFl0WmgyamRYaGtvS0RKbWFTdUlCV2FqV1cxbTJYbWxmbXZ2SGJKNk05T2VWeUhMMEF0Z2RUWDdySHR2b0ZaTGZWaVB6SnExa3owWnlFYzI4N21McEp6S0dQUXdUaTZsRU1oMmhJOXR6bXBBaGd4Yk5tNkpWdXhGQXBRTkRQYjBZcElRM2o2aUFlYlMxLU1oUVdpaktZVGxnTQ?oc=5",
+      "percent": null,
+      "published": "2026-09-15T02:59:00Z",
+      "scope": "local",
+      "source": "KVUE",
+      "title": "Austin-based Oracle begins another round of layoffs",
+      "tokens": [
+        "another",
+        "austin",
+        "based",
+        "begins",
+        "oracle",
+        "round"
+      ]
+    }
+  },
   "news_initialized": true,
   "news_seen": {
     "41b9af14e5b4067acc9e1f84": "2026-09-12T06:28:05Z",
+    "8f96414a516e52713fc89d21": "2026-09-15T12:37:07Z",
     "b01abc3bbe11a703e82a7edf": "2026-09-15T00:23:13Z",
     "bb31b47e9400824e9ff0ba47": "2026-09-11T10:12:17Z"
   },

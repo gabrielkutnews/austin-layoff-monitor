@@ -263,6 +263,13 @@ class OperationsTests(unittest.TestCase):
         self.assertIn("cron: '0 * * * *'", workflow)
         self.assertIn("timeout-minutes: 355", workflow)
 
+    def test_workflow_maps_only_required_secrets(self):
+        workflow = (Path(__file__).parents[1] / ".github/workflows/monitor.yml").read_text()
+        self.assertNotIn("${{ toJSON(secrets) }}", workflow)
+        self.assertNotIn("ALL_SECRETS:", workflow)
+        self.assertIn("SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}", workflow)
+        self.assertIn("SLACK_USER_IDS: ${{ secrets.SLACK_USER_IDS }}", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()

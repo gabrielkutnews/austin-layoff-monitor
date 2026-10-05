@@ -5,16 +5,55 @@ on:
     - cron: '0 * * * *' # hourly backstop; loop.sh polls every five minutes
   workflow_dispatch: {}
 
-concurrency:
-  group: austin-layoff-monitor
-  cancel-in-progress: false
-
 permissions:
   contents: write
   actions: write
 
 jobs:
+  backstop:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+    steps:
+      - name: Check whether the monitor is already active
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          # A chained or manual dispatch should enter the monitor queue. An
+          # hourly backstop should finish successfully when another run is
+          # already active instead of sitting pending until GitHub cancels it.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if ! runs=$(gh api \
+            "/repos/$GITHUB_REPOSITORY/actions/workflows/monitor.yml/runs?per_page=100"); then
+            echo "GitHub API unavailable; leaving the active monitor undisturbed"
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          other_active=$(printf '%s' "$runs" | jq -r \
+            --argjson current "$GITHUB_RUN_ID" \
+            '.workflow_runs[] | select((.status == "in_progress" or .status == "queued") and .id != $current) | .id' \
+            | head -n 1)
+          if [ -n "$other_active" ]; then
+            echo "Monitor run $other_active is already active; backstop is healthy"
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "No active monitor found; backstop will start one"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   monitor:
+    needs: backstop
+    if: needs.backstop.outputs.should_run == 'true'
+    concurrency:
+      group: austin-layoff-monitor
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 355
     steps:

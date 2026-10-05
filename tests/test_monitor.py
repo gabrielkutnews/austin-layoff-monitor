@@ -270,6 +270,15 @@ class OperationsTests(unittest.TestCase):
         self.assertIn("SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}", workflow)
         self.assertIn("SLACK_USER_IDS: ${{ secrets.SLACK_USER_IDS }}", workflow)
 
+    def test_hourly_backstop_skips_when_another_run_is_active(self):
+        workflow = (Path(__file__).parents[1] / ".github/workflows/monitor.yml").read_text()
+        self.assertIn("EVENT_NAME: ${{ github.event_name }}", workflow)
+        self.assertIn('status == "in_progress" or .status == "queued"', workflow)
+        self.assertIn(".id != $current", workflow)
+        self.assertIn("if: needs.backstop.outputs.should_run == 'true'", workflow)
+        self.assertGreater(workflow.index("monitor:\n    needs: backstop"),
+                           workflow.index("backstop:"))
+
 
 if __name__ == "__main__":
     unittest.main()
